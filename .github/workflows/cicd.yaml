@@ -21,8 +21,7 @@ jobs:
         host: ${{ secrets.HOST  }}
         username: ${{ secrets.USERNAME }}
         passphrase: ""
-        source: "build/"
+        source: "Dockerfile,build/"
         target: "/home/${{ secrets.USERNAME }}/web"
-        source: "Dockerfile"
-        target: "/home/${{ secrets.USERNAME }}/web"
+
         
