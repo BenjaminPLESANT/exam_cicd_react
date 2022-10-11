@@ -1,8 +1,13 @@
 name: React CI/CD
 
+# Execute le job suivant à chaque push ou pull request de la branche master
 on:
   push:
-    branches: [ "master" ]
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
 
 jobs:
   build:
@@ -11,17 +16,24 @@ jobs:
     - name: CI
       uses: actions/checkout@v3
     - uses: actions/setup-node@v3
+    # Installe les dépendances node, build le projet et lance les test
     - run: npm install 
     - run: npm run build --if-present
     - run: npm run test
     - name: CD
+    # Github actions simplifiant l'utilisation de commande svp pour transférer un élément d'une machine à une autre
+    # Les paramètres utilisées sont les Actions secrets renseignés sur github
       uses: appleboy/scp-action@master
       with:
         key: ${{ secrets.PRIVATE_KEY }}
         host: ${{ secrets.HOST  }}
         username: ${{ secrets.USERNAME }}
+        # Quand il n'y à pas de passphrase, mettre en dur une chaîne de caractère vide, il est impossible de créer un actions secret
+        # pour gérer ce cas
         passphrase: ""
+        # Copie le fichier Dockerfile et le dossier build
         source: "Dockerfile,build/"
+        # Dans le le dossier web de l'utilisateur
         target: "/home/${{ secrets.USERNAME }}/web"
 
         
