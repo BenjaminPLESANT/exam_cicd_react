@@ -8,6 +8,5 @@ COPY package-lock.json .
 RUN npm install
 # Copy app files
 COPY . .
-# Expose port
 # Start the app
 CMD [ "npm", "start" ]
