@@ -1,4 +1,4 @@
-name: React CI
+name: React CI/CD
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         host: ${{ secrets.HOST  }}
         username: ${{ secrets.USERNAME }}
-        passphrase: ""
+        passphrase: ${{ secrets.PASSPHRASE }}
         source: "build/"
-        target: "/home/benjamin/web"
+        target: "/home/${{ secrets.USERNAME }}/web"
         
