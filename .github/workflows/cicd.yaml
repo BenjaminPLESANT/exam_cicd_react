@@ -20,7 +20,9 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         host: ${{ secrets.HOST  }}
         username: ${{ secrets.USERNAME }}
-        passphrase: ${{ secrets.PASSPHRASE }}
+        passphrase: ""
         source: "build/"
+        target: "/home/${{ secrets.USERNAME }}/web"
+        source: "Dockerfile"
         target: "/home/${{ secrets.USERNAME }}/web"
         
